@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'gallery/gallery_page.dart';
+import 'util/custom_scroll_behavior.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -11,11 +14,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      scrollBehavior: MyCustomScrollBehavior(),
       title: 'Stylish',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: Colors.grey,
+          accentColor: Colors.grey,
+          backgroundColor: Colors.grey[200],
+          errorColor: Colors.red,
+          brightness: Brightness.light,
+        ),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'STYLiSH'),
     );
   }
 }
@@ -30,41 +41,21 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: Image.asset('assets/stylish_logo.png', height: 20,),
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+        title: Image.asset(
+          'assets/stylish_logo.png',
+          height: 20,
         ),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: theme.colorScheme.secondary,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      body: Center(child: GalleryPage()),
     );
   }
 }
