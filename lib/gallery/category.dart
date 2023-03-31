@@ -20,12 +20,15 @@ class CategorySection extends StatelessWidget {
 
     return Expanded(
         child: SingleChildScrollView(
-      child: Column(
-        children: [
-          Text(
+      child: ExpansionTile(
+        initiallyExpanded: true,
+        title: Center(
+          child: Text(
             category.title,
             style: style,
           ),
+        ),
+        children: [
           for (var product in category.products)
             ProductCard(productName: product, price: "NT\$ 323,000")
         ],
