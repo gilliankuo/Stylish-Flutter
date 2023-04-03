@@ -15,11 +15,22 @@ class ProductDescriptionSection extends StatelessWidget {
           height: 10,
         ),
         Row(
-          children: const [
+          children: [
             Text(
               "細部說明",
+              style: TextStyle(
+                  foreground: Paint()
+                    ..shader = const LinearGradient(
+                      colors: <Color>[
+                        Colors.pinkAccent,
+                        Colors.deepPurpleAccent,
+                        Colors.red
+                        //add more color here.
+                      ],
+                    ).createShader(
+                        const Rect.fromLTWH(0.0, 0.0, 200.0, 100.0))),
             ),
-            Expanded(
+            const Expanded(
                 child: Divider(
               thickness: 1,
               indent: 10,
