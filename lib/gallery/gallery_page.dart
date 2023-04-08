@@ -25,32 +25,43 @@ class GalleryPage extends StatelessWidget {
       )));
     }
 
-    return LayoutBuilder(builder: (context, constraints) {
-      return Material(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-                height: 180,
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: banners.length,
-                    itemBuilder: (context, index) =>
-                        BannerCard(imageUrl: banners[index]))),
-            Expanded(
-                child: ResponsiveLayout(
-              mobileBody: MobileCategory(
-                categories: categories,
-                onProductClick: onProductClick,
-              ),
-              webBody: WebCategory(
-                categories: categories,
-                onProductClick: onProductClick,
-              ),
-            )),
-          ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Image.asset(
+          'assets/stylish_logo.png',
+          height: 20,
         ),
-      );
-    });
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Theme.of(context).colorScheme.secondary,
+      ),
+      body: LayoutBuilder(builder: (context, constraints) {
+        return Material(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                  height: 180,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: banners.length,
+                      itemBuilder: (context, index) =>
+                          BannerCard(imageUrl: banners[index]))),
+              Expanded(
+                  child: ResponsiveLayout(
+                mobileBody: MobileCategory(
+                  categories: categories,
+                  onProductClick: onProductClick,
+                ),
+                webBody: WebCategory(
+                  categories: categories,
+                  onProductClick: onProductClick,
+                ),
+              )),
+            ],
+          ),
+        );
+      }),
+    );
   }
 }

@@ -26,36 +26,7 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.light,
         ),
       ),
-      home: const MyHomePage(title: 'STYLiSH'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Image.asset(
-          'assets/stylish_logo.png',
-          height: 20,
-        ),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: theme.colorScheme.secondary,
-      ),
-      body: Center(child: GalleryPage()),
+      home: GalleryPage(),
     );
   }
 }
