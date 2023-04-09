@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/gallery/responsive_layout.dart';
 import 'package:stylish/product_detail/bloc/product_detail_bloc.dart';
+import 'package:stylish/product_detail/bloc/product_detail_event.dart';
+import 'package:stylish/product_detail/bloc/product_detail_state.dart';
 
 import 'product.dart';
 import 'product_description_section.dart';
@@ -20,7 +22,7 @@ class ProductDetailPage extends StatelessWidget {
 
     return BlocProvider(
       create: (context) {
-        return ProductDetailBloc();
+        return ProductDetailBloc()..add(ProductFetched(mockProduct));
       },
       child: Scaffold(
         appBar: AppBar(
@@ -32,10 +34,14 @@ class ProductDetailPage extends StatelessWidget {
             elevation: 0,
             backgroundColor: Theme.of(context).colorScheme.secondary,
             automaticallyImplyLeading: false),
-        body: ResponsiveLayout(
-          mobileBody: MobileProductDetailPage(product: mockProduct),
-          webBody: WebProductDetailPage(product: mockProduct),
-        ),
+        body: BlocBuilder<ProductDetailBloc, ProductDetailState>(
+            builder: (context, state) {
+          if (state.product == null) return const SizedBox.shrink();
+          return ResponsiveLayout(
+            mobileBody: MobileProductDetailPage(product: state.product!),
+            webBody: WebProductDetailPage(product: state.product!),
+          );
+        }),
       ),
     );
   }

@@ -26,3 +26,12 @@ class QuantityChanged extends ProductDetailEvent {
   @override
   List<Object> get props => [quantity];
 }
+
+class ProductFetched extends ProductDetailEvent {
+  const ProductFetched(this.product);
+
+  final Product product;
+
+  @override
+  List<Object> get props => [product];
+}

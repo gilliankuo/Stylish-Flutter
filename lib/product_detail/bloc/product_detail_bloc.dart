@@ -6,6 +6,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
   ProductDetailBloc() : super(const ProductDetailState()) {
     on<SizeChanged>(_onSizeChanged);
     on<QuantityChanged>(_onQuantityChanged);
+    on<ProductFetched>(_onProductFetched);
   }
 
   void _onSizeChanged(
@@ -22,5 +23,12 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
     final newQuantity = state.quantity + event.quantity;
     if (newQuantity < 0) return;
     emit(state.copyWith(quantity: newQuantity));
+  }
+
+  void _onProductFetched(
+    ProductFetched event,
+    Emitter<ProductDetailState> emit,
+  ) {
+    emit(state.copyWith(product: event.product));
   }
 }
