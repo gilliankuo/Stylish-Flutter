@@ -1,12 +1,9 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 
 import 'gallery/gallery_page.dart';
-import 'product_detail/counter/counter_observer.dart';
 import 'util/custom_scroll_behavior.dart';
 
 void main() {
-  Bloc.observer = const CounterObserver();
   runApp(const MyApp());
 }
 

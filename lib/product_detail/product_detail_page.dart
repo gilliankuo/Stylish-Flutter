@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/gallery/responsive_layout.dart';
+import 'package:stylish/product_detail/bloc/product_detail_bloc.dart';
 
-import 'counter/counter_cubit.dart';
 import 'product.dart';
 import 'product_description_section.dart';
 import 'product_image_section.dart';
@@ -19,7 +19,9 @@ class ProductDetailPage extends StatelessWidget {
     final mockProduct = createMockProduct();
 
     return BlocProvider(
-      create: (_) => CounterCubit(),
+      create: (context) {
+        return ProductDetailBloc();
+      },
       child: Scaffold(
         appBar: AppBar(
             title: Image.asset(
