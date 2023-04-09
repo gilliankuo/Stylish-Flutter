@@ -72,9 +72,8 @@ class ProductInfoSection extends StatelessWidget {
               ),
               // RadioListTile(value: "value", groupValue: "groupValue", onChanged: (value) {})
               SizeRadioButton(
-                  options: product.sizes,
-                  onChanged: (value) {}, // TODO
-                  selectedOption: 0)
+                options: product.sizes,
+              )
             ],
           ),
         ),
