@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/gallery/responsive_layout.dart';
 
+import 'counter/counter_cubit.dart';
 import 'product.dart';
 import 'product_description_section.dart';
 import 'product_image_section.dart';
@@ -16,19 +18,22 @@ class ProductDetailPage extends StatelessWidget {
     // mock data
     final mockProduct = createMockProduct();
 
-    return Scaffold(
-      appBar: AppBar(
-          title: Image.asset(
-            'assets/stylish_logo.png',
-            height: 20,
-          ),
-          centerTitle: true,
-          elevation: 0,
-          backgroundColor: Theme.of(context).colorScheme.secondary,
-          automaticallyImplyLeading: false),
-      body: ResponsiveLayout(
-        mobileBody: MobileProductDetailPage(product: mockProduct),
-        webBody: WebProductDetailPage(product: mockProduct),
+    return BlocProvider(
+      create: (_) => CounterCubit(),
+      child: Scaffold(
+        appBar: AppBar(
+            title: Image.asset(
+              'assets/stylish_logo.png',
+              height: 20,
+            ),
+            centerTitle: true,
+            elevation: 0,
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+            automaticallyImplyLeading: false),
+        body: ResponsiveLayout(
+          mobileBody: MobileProductDetailPage(product: mockProduct),
+          webBody: WebProductDetailPage(product: mockProduct),
+        ),
       ),
     );
   }

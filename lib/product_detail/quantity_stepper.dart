@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'counter/counter_cubit.dart';
 
 class QuantityStepper extends StatelessWidget {
   const QuantityStepper({super.key});
@@ -9,14 +12,17 @@ class QuantityStepper extends StatelessWidget {
       children: [
         IconButton(
           splashRadius: 16,
-          onPressed: () {},
+          onPressed: () => context.read<CounterCubit>().decrement(),
           icon: const Icon(Icons.remove),
         ),
-        // TODO quantity
-        const Expanded(child: Center(child: Text("1"))),
+        BlocBuilder<CounterCubit, int>(
+          builder: (context, state) {
+            return Expanded(child: Center(child: Text("$state")));
+          },
+        ),
         IconButton(
           splashRadius: 16,
-          onPressed: () {},
+          onPressed: () => context.read<CounterCubit>().increment(),
           icon: const Icon(Icons.add),
         ),
       ],
