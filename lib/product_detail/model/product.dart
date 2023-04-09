@@ -1,3 +1,5 @@
+import 'package:stylish/product_detail/model/variant.dart';
+
 class Product {
   final String id;
   final String imageUrl;
@@ -13,6 +15,7 @@ class Product {
 
   final List<ProductColor> colors;
   final List<ProductSize> sizes;
+  final List<Variant> variants;
 
   Product(
       {required this.id,
@@ -27,7 +30,8 @@ class Product {
       required this.description,
       required this.colors,
       required this.sizes,
-      required this.descriptionImagesUrl});
+      required this.descriptionImagesUrl,
+      required this.variants});
 }
 
 class ProductColor {
@@ -51,6 +55,15 @@ extension ProductSizeExtension on ProductSize {
       default:
         return '';
     }
+  }
+}
+
+extension ProductExtension on Product {
+  int getStock(ProductSize? selectedSize) {
+    return variants
+        .firstWhere((variant) => variant.size == selectedSize,
+            orElse: () => Variant(ProductSize.small, 0))
+        .stock;
   }
 }
 
@@ -81,5 +94,10 @@ Product createMockProduct() {
         "https://picsum.photos/id/139/800/400",
         "https://picsum.photos/id/89/800/400",
         "https://picsum.photos/id/77/800/400",
+      ],
+      variants: [
+        Variant(ProductSize.small, 3),
+        Variant(ProductSize.medium, 6),
+        Variant(ProductSize.large, 1),
       ]);
 }

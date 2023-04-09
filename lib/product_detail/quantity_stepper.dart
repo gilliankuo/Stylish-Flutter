@@ -10,28 +10,33 @@ class QuantityStepper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        IconButton(
-          splashRadius: 16,
-          onPressed: () =>
-              context.read<ProductDetailBloc>().add(const QuantityChanged(-1)),
-          icon: const Icon(Icons.remove),
-        ),
-        BlocBuilder<ProductDetailBloc, ProductDetailState>(
-          buildWhen: (previous, current) =>
-              previous.quantity != current.quantity,
-          builder: (context, state) {
-            return Expanded(child: Center(child: Text("${state.quantity}")));
-          },
-        ),
-        IconButton(
-          splashRadius: 16,
-          onPressed: () =>
-              context.read<ProductDetailBloc>().add(const QuantityChanged(1)),
-          icon: const Icon(Icons.add),
-        ),
-      ],
-    );
+    return BlocBuilder<ProductDetailBloc, ProductDetailState>(
+        builder: (context, state) {
+      return Row(
+        children: [
+          IconButton(
+            splashRadius: 16,
+            onPressed: () => context
+                .read<ProductDetailBloc>()
+                .add(const QuantityChanged(-1)),
+            icon: const Icon(Icons.remove),
+          ),
+          Expanded(child: Center(child: Text("${state.quantity}"))),
+          IconButton(
+            splashRadius: 16,
+            onPressed: (state.quantity >= state.currentStock)
+                ? null
+                : () => context
+                    .read<ProductDetailBloc>()
+                    .add(const QuantityChanged(1)),
+            icon: const Icon(Icons.add),
+            disabledColor: Colors.grey,
+          ),
+        ],
+      );
+    });
   }
 }
+
+//() =>
+//               context.read<ProductDetailBloc>().add(const QuantityChanged(1)),

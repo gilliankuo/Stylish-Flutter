@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../util/color_util.dart';
-import 'product.dart';
+import 'bloc/product_detail_bloc.dart';
+import 'bloc/product_detail_state.dart';
+import 'model/product.dart';
 import 'quantity_stepper.dart';
 import 'size_radio_button.dart';
 
@@ -93,6 +96,15 @@ class ProductInfoSection extends StatelessWidget {
               ),
               Expanded(child: QuantityStepper())
             ],
+          ),
+        ),
+        IntrinsicHeight(
+          child: Container(
+            alignment: Alignment.centerRight,
+            child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
+                builder: (context, state) {
+              return Text("庫存： ${state.currentStockText}");
+            }),
           ),
         ),
         generalPadding,

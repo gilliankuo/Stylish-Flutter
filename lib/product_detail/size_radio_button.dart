@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/product_detail/bloc/product_detail_event.dart';
-import 'package:stylish/product_detail/product.dart';
+import 'package:stylish/product_detail/model/product.dart';
 
 import 'bloc/product_detail_bloc.dart';
 import 'bloc/product_detail_state.dart';

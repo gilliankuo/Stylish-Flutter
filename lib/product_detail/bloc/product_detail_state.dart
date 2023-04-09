@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../product.dart';
+import '../model/product.dart';
 
 class ProductDetailState extends Equatable {
   const ProductDetailState({
@@ -12,6 +12,9 @@ class ProductDetailState extends Equatable {
   final Product? product;
   final ProductSize? size;
   final int quantity;
+
+  get currentStock => product?.getStock(size) ?? 0;
+  get currentStockText => size != null ? '$currentStock' : '請選擇尺寸';
 
   ProductDetailState copyWith({
     Product? product,
