@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/product_detail/bloc/product_detail_event.dart';
-import 'package:stylish/product_detail/model/product.dart';
 
 import 'bloc/product_detail_bloc.dart';
 import 'bloc/product_detail_state.dart';
 
 class SizeRadioButton extends StatelessWidget {
-  final List<ProductSize> options;
+  final List<String> options;
 
   const SizeRadioButton({
     super.key,
@@ -40,7 +39,7 @@ class SizeRadioButton extends StatelessWidget {
                   minimumSize: Size.zero,
                 ),
                 child: Text(
-                  options[index].name,
+                  options[index],
                 ),
               ),
             ),

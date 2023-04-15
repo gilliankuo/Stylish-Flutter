@@ -12,7 +12,7 @@ abstract class ProductDetailEvent extends Equatable {
 class SizeChanged extends ProductDetailEvent {
   const SizeChanged(this.size);
 
-  final ProductSize size;
+  final String size;
 
   @override
   List<Object> get props => [size];

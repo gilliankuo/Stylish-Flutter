@@ -10,15 +10,16 @@ class ProductDetailState extends Equatable {
   });
 
   final Product? product;
-  final ProductSize? size;
+  final String? size;
   final int quantity;
 
   get currentStock => product?.getStock(size) ?? 0;
+
   get currentStockText => size != null ? '$currentStock' : '請選擇尺寸';
 
   ProductDetailState copyWith({
     Product? product,
-    ProductSize? size,
+    String? size,
     int? quantity,
   }) {
     return ProductDetailState(

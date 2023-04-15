@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'category.dart';
+import 'model/category.dart';
 import 'widgets.dart';
 
 class CategorySection extends StatelessWidget {
@@ -34,8 +34,9 @@ class CategorySection extends StatelessWidget {
         children: [
           for (var product in category.products)
             ProductCard(
-              productName: product,
-              price: "NT\$ 323,000",
+              productName: product.title,
+              price: "NT\$ ${product.price}",
+              imageUrl: product.imageUrl,
               onProductClick: onProductClick,
             )
         ],

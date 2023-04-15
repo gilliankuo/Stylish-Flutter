@@ -32,12 +32,14 @@ class BannerCard extends StatelessWidget {
 class ProductCard extends StatelessWidget {
   final String productName;
   final String price;
+  final String imageUrl;
   final VoidCallback onProductClick;
 
   const ProductCard(
       {super.key,
       required this.productName,
       required this.price,
+      required this.imageUrl,
       required this.onProductClick});
 
   @override
@@ -53,10 +55,12 @@ class ProductCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             side: BorderSide(color: theme.colorScheme.primary)),
         child: Row(children: [
-          Image.asset(
-            'assets/cloth.jpeg',
-            height: 120,
-          ),
+          Image.network(imageUrl,
+              fit: BoxFit.cover,
+              height: 120,
+              width: 100,
+              errorBuilder: (context, error, stackTrace) =>
+                  Image.asset('assets/stylish_placeholder.png')),
           const SizedBox(
             width: 10,
           ),

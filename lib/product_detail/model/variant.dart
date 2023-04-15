@@ -1,9 +1,18 @@
-import 'package:stylish/product_detail/model/product.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'variant.g.dart';
+
+@JsonSerializable()
 class Variant {
-  // TODO ProductColor
-  final ProductSize size;
+  @JsonKey(name: 'color_code')
+  final String colorCode;
+  final String size;
   final int stock;
 
-  Variant(this.size, this.stock);
+  factory Variant.fromJson(Map<String, dynamic> json) =>
+      _$VariantFromJson(json);
+
+  Map<String, dynamic> toJson() => _$VariantToJson(this);
+
+  Variant(this.colorCode, this.size, this.stock);
 }
