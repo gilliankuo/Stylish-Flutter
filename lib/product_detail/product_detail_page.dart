@@ -11,18 +11,15 @@ import 'product_image_section.dart';
 import 'product_info_section.dart';
 
 class ProductDetailPage extends StatelessWidget {
-  final String productId;
+  final int productId;
 
   const ProductDetailPage({super.key, required this.productId});
 
   @override
   Widget build(BuildContext context) {
-    // mock data
-    final mockProduct = createMockProduct();
-
     return BlocProvider(
       create: (context) {
-        return ProductDetailBloc()..add(ProductFetched(mockProduct));
+        return ProductDetailBloc()..add(ProductFetched(productId));
       },
       child: Scaffold(
         appBar: AppBar(
@@ -36,11 +33,12 @@ class ProductDetailPage extends StatelessWidget {
             automaticallyImplyLeading: false),
         body: BlocBuilder<ProductDetailBloc, ProductDetailState>(
             builder: (context, state) {
-          if (state.product == null) return const SizedBox.shrink();
-          return ResponsiveLayout(
-            mobileBody: MobileProductDetailPage(product: state.product!),
-            webBody: WebProductDetailPage(product: state.product!),
-          );
+          return state.product == null
+              ? const Center(child: CircularProgressIndicator())
+              : ResponsiveLayout(
+                  mobileBody: MobileProductDetailPage(product: state.product!),
+                  webBody: WebProductDetailPage(product: state.product!),
+                );
         }),
       ),
     );
@@ -78,7 +76,7 @@ class WebProductDetailPage extends StatelessWidget {
                 ],
               ),
               ProductDescriptionSection(
-                description: product.description,
+                description: product.story,
                 images: product.descriptionImagesUrl,
               )
             ],
@@ -105,7 +103,7 @@ class MobileProductDetailPage extends StatelessWidget {
         product: product,
       ),
       ProductDescriptionSection(
-        description: product.description,
+        description: product.story,
         images: product.descriptionImagesUrl,
       )
     ]);

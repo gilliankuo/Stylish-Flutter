@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:stylish/product_detail/bloc/product_detail_event.dart';
 import 'package:stylish/product_detail/bloc/product_detail_state.dart';
+import 'package:stylish/product_detail/data/product_detail_repository.dart';
 import 'package:stylish/product_detail/model/product.dart';
 
 class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
@@ -9,6 +10,8 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
     on<QuantityChanged>(_onQuantityChanged);
     on<ProductFetched>(_onProductFetched);
   }
+
+  final _repository = ProductDetailRepository();
 
   void _onSizeChanged(
     SizeChanged event,
@@ -28,10 +31,11 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
     emit(state.copyWith(quantity: newQuantity));
   }
 
-  void _onProductFetched(
+  Future<void> _onProductFetched(
     ProductFetched event,
     Emitter<ProductDetailState> emit,
-  ) {
-    emit(state.copyWith(product: event.product));
+  ) async {
+    final product = await _repository.getProduct(event.productId);
+    emit(state.copyWith(product: product));
   }
 }

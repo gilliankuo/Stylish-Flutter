@@ -16,10 +16,9 @@ class GalleryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    onProductClick() {
-      Navigator.of(context)
-          .push(createSlideInRightRoute(const ProductDetailPage(
-        productId: "1",
+    onProductClick(int productId) {
+      Navigator.of(context).push(createSlideInRightRoute(ProductDetailPage(
+        productId: productId,
       )));
     }
 

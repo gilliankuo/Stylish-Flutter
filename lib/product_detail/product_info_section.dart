@@ -127,10 +127,8 @@ class ProductInfoSection extends StatelessWidget {
         const SizedBox(height: 10),
         const Text("實品顏色依單品照為主"),
         Text(product.material),
-        Text("厚薄： ${product.thickness}"),
-        Text("彈性： ${product.elasticity}"),
+        Text(product.description),
         Text("素材產地 / ${product.originOfMaterials}"),
-        Text("加工產地 / ${product.processingOrigin}"),
       ],
     );
   }

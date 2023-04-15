@@ -5,7 +5,7 @@ import 'widgets.dart';
 
 class CategorySection extends StatelessWidget {
   final Category category;
-  final VoidCallback onProductClick;
+  final ValueSetter<int> onProductClick;
   final bool isExpansionAllow;
 
   const CategorySection(
@@ -37,7 +37,7 @@ class CategorySection extends StatelessWidget {
               productName: product.title,
               price: "NT\$ ${product.price}",
               imageUrl: product.imageUrl,
-              onProductClick: onProductClick,
+              onProductClick: () => onProductClick(product.id),
             )
         ],
       ),
@@ -47,7 +47,7 @@ class CategorySection extends StatelessWidget {
 
 class MobileCategory extends StatelessWidget {
   final List<Category> categories;
-  final VoidCallback onProductClick;
+  final ValueSetter<int> onProductClick;
 
   const MobileCategory(
       {super.key, required this.categories, required this.onProductClick});
@@ -69,7 +69,7 @@ class MobileCategory extends StatelessWidget {
 
 class WebCategory extends StatelessWidget {
   final List<Category> categories;
-  final VoidCallback onProductClick;
+  final ValueSetter<int> onProductClick;
 
   const WebCategory(
       {super.key, required this.categories, required this.onProductClick});
