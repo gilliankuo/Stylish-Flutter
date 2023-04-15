@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class BannerCard extends StatelessWidget {
@@ -55,12 +56,16 @@ class ProductCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             side: BorderSide(color: theme.colorScheme.primary)),
         child: Row(children: [
-          Image.network(imageUrl,
+          CachedNetworkImage(
+              imageUrl: imageUrl,
               fit: BoxFit.cover,
               height: 120,
               width: 100,
-              errorBuilder: (context, error, stackTrace) =>
-                  Image.asset('assets/stylish_placeholder.png')),
+              errorWidget: (context, url, error) => Image.asset(
+                    'assets/stylish_placeholder.png',
+                    height: 120,
+                    width: 100,
+                  )),
           const SizedBox(
             width: 10,
           ),
