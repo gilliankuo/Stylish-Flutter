@@ -63,7 +63,6 @@ class Product {
 class ProductColor {
   final String name;
 
-  // TODO code from API is different from hex code
   @JsonKey(name: 'code')
   final String hex;
 
@@ -93,15 +92,21 @@ extension ProductSizeExtension on ProductSize {
 }
 
 extension ProductExtension on Product {
-  // int getStock(ProductSize? selectedSize) {
-  //   return variants
-  //       .firstWhere((variant) => variant.size == selectedSize,
-  //           orElse: () => Variant(ProductSize.small, 0))
-  //       .stock;
-  // }
-  int getStock(String? selectedSize) {
+
+  int getStock(
+    int? selectedColorIndex,
+    int? selectedSizeIndex,
+  ) {
+    if (selectedColorIndex == null || selectedSizeIndex == null) {
+      return 0;
+    }
+    final selectedColor = colors[selectedColorIndex];
+    final selectedSize = sizes[selectedSizeIndex];
     return variants
-        .firstWhere((variant) => variant.size == selectedSize,
+        .firstWhere(
+            (variant) =>
+                (variant.size == selectedSize) &&
+                (variant.colorCode == selectedColor.hex),
             orElse: () => Variant("000000", "s", 0))
         .stock;
   }

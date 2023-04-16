@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stylish/gallery/responsive_layout.dart';
+import 'package:stylish/util/responsive_layout.dart';
 import 'package:stylish/product_detail/bloc/product_detail_bloc.dart';
 import 'package:stylish/product_detail/bloc/product_detail_event.dart';
 import 'package:stylish/product_detail/bloc/product_detail_state.dart';

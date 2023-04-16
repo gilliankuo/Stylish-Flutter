@@ -5,30 +5,39 @@ import '../model/product.dart';
 class ProductDetailState extends Equatable {
   const ProductDetailState({
     this.product,
-    this.size,
+    this.selectedColorIndex,
+    this.selectedSizeIndex,
     this.quantity = 1,
   });
 
   final Product? product;
-  final String? size;
   final int quantity;
+  final int? selectedColorIndex;
+  final int? selectedSizeIndex;
 
-  get currentStock => product?.getStock(size) ?? 0;
+  get currentStock =>
+      product?.getStock(selectedColorIndex, selectedSizeIndex) ?? 0;
 
-  get currentStockText => size != null ? '$currentStock' : '請選擇尺寸';
+  get currentStockText =>
+      (selectedColorIndex != null && selectedSizeIndex != null)
+          ? '$currentStock'
+          : '請選擇顏色尺寸';
 
   ProductDetailState copyWith({
     Product? product,
-    String? size,
     int? quantity,
+    int? colorIndex,
+    int? sizeIndex,
   }) {
     return ProductDetailState(
       product: product ?? this.product,
-      size: size ?? this.size,
+      selectedColorIndex: colorIndex ?? selectedColorIndex,
+      selectedSizeIndex: sizeIndex ?? selectedSizeIndex,
       quantity: quantity ?? this.quantity,
     );
   }
 
   @override
-  List<Object?> get props => [product, size, quantity];
+  List<Object?> get props =>
+      [product, selectedColorIndex, selectedSizeIndex, quantity];
 }

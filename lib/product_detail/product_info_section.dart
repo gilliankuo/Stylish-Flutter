@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stylish/product_detail/view/color_box.dart';
 
-import '../util/color_util.dart';
 import 'bloc/product_detail_bloc.dart';
+import 'bloc/product_detail_event.dart';
 import 'bloc/product_detail_state.dart';
 import 'model/product.dart';
 import 'quantity_stepper.dart';
-import 'size_radio_button.dart';
+import 'view/radio_selector.dart';
+import 'view/size_button.dart';
 
 class ProductInfoSection extends StatelessWidget {
   final Product product;
@@ -50,12 +52,23 @@ class ProductInfoSection extends StatelessWidget {
                 thickness: 1,
                 width: 30,
               ),
-              for (var color in product.colors)
-                Padding(
-                  padding: const EdgeInsets.only(right: 14),
-                  child: Container(
-                      height: 20, width: 20, color: HexColor(color.hex)),
-                )
+              BlocBuilder<ProductDetailBloc, ProductDetailState>(
+                  builder: (context, state) {
+                return RadioSelector(
+                    options: product.colors,
+                    selectedIndex: state.selectedColorIndex ?? -1,
+                    childBuilder: (color, index, isSelected) {
+                      return ColorBox(
+                          color: color,
+                          index: index,
+                          isSelected: isSelected,
+                          onTap: () {
+                            context
+                                .read<ProductDetailBloc>()
+                                .add(ColorChanged(index));
+                          });
+                    });
+              })
             ],
           ),
         ),
@@ -73,10 +86,23 @@ class ProductInfoSection extends StatelessWidget {
                 thickness: 1,
                 width: 30,
               ),
-              // RadioListTile(value: "value", groupValue: "groupValue", onChanged: (value) {})
-              SizeRadioButton(
-                options: product.sizes,
-              )
+              BlocBuilder<ProductDetailBloc, ProductDetailState>(
+                  builder: (context, state) {
+                return RadioSelector(
+                    options: product.sizes,
+                    selectedIndex: state.selectedSizeIndex ?? -1,
+                    childBuilder: (size, index, isSelected) {
+                      return SizeButton(
+                          size: size,
+                          index: index,
+                          isSelected: isSelected,
+                          onPressed: () {
+                            context
+                                .read<ProductDetailBloc>()
+                                .add(SizeChanged(index));
+                          });
+                    });
+              })
             ],
           ),
         ),

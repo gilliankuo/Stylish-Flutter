@@ -7,7 +7,7 @@ import 'package:stylish/product_detail/product_detail_page.dart';
 import '../util/route_util.dart';
 import 'bloc/gallery_event.dart';
 import 'category_section.dart';
-import 'responsive_layout.dart';
+import '../util/responsive_layout.dart';
 import 'widgets.dart';
 
 class GalleryPage extends StatelessWidget {

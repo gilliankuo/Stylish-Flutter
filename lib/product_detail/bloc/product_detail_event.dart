@@ -10,12 +10,12 @@ abstract class ProductDetailEvent extends Equatable {
 }
 
 class SizeChanged extends ProductDetailEvent {
-  const SizeChanged(this.size);
+  const SizeChanged(this.sizeIndex);
 
-  final String size;
+  final int sizeIndex;
 
   @override
-  List<Object> get props => [size];
+  List<Object> get props => [sizeIndex];
 }
 
 class QuantityChanged extends ProductDetailEvent {
@@ -25,6 +25,15 @@ class QuantityChanged extends ProductDetailEvent {
 
   @override
   List<Object> get props => [quantity];
+}
+
+class ColorChanged extends ProductDetailEvent {
+  const ColorChanged(this.colorIndex);
+
+  final int colorIndex;
+
+  @override
+  List<Object> get props => [colorIndex];
 }
 
 class ProductFetched extends ProductDetailEvent {
