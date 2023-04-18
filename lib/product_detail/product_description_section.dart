@@ -16,19 +16,21 @@ class ProductDescriptionSection extends StatelessWidget {
         ),
         Row(
           children: [
-            Text(
-              "細部說明",
-              style: TextStyle(
-                  foreground: Paint()
-                    ..shader = const LinearGradient(
-                      colors: <Color>[
-                        Colors.pinkAccent,
-                        Colors.deepPurpleAccent,
-                        Colors.red
-                        //add more color here.
-                      ],
-                    ).createShader(
-                        const Rect.fromLTWH(0.0, 0.0, 200.0, 100.0))),
+            ShaderMask(
+              shaderCallback: (Rect bounds) {
+                return const LinearGradient(
+                  colors: <Color>[
+                    Colors.pinkAccent,
+                    Colors.deepPurpleAccent,
+                    Colors.red
+                  ],
+                  tileMode: TileMode.mirror,
+                ).createShader(bounds);
+              },
+              blendMode: BlendMode.srcATop,
+              child: const Center(
+                child: Text("細部說明"),
+              ),
             ),
             const Expanded(
                 child: Divider(
