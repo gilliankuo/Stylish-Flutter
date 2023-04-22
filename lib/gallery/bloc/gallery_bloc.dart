@@ -8,11 +8,11 @@ import '../data/gallery_repository.dart';
 import 'gallery_event.dart';
 
 class GalleryBloc extends Bloc<GalleryEvent, GalleryState> {
-  GalleryBloc() : super(const GalleryState()) {
+  GalleryBloc({required this.repository}) : super(const GalleryState()) {
     on<CategoriesFetched>(_onCategoriesFetched);
   }
 
-  final _repository = GalleryRepository();
+  GalleryRepository repository;
 
   Future<void> _onCategoriesFetched(
     CategoriesFetched event,
@@ -20,9 +20,9 @@ class GalleryBloc extends Bloc<GalleryEvent, GalleryState> {
   ) async {
     // hard coded category
     final futures = [
-      _repository.getProducts("women"),
-      _repository.getProducts("men"),
-      _repository.getProducts("accessories"),
+      repository.getProducts("women"),
+      repository.getProducts("men"),
+      repository.getProducts("accessories"),
     ];
 
     final responses = await Future.wait(futures);

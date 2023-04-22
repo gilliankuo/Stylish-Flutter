@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stylish/util/responsive_layout.dart';
 import 'package:stylish/product_detail/bloc/product_detail_bloc.dart';
 import 'package:stylish/product_detail/bloc/product_detail_event.dart';
 import 'package:stylish/product_detail/bloc/product_detail_state.dart';
+import 'package:stylish/util/responsive_layout.dart';
 
+import 'data/product_detail_repository.dart';
 import 'model/product.dart';
 import 'product_description_section.dart';
 import 'product_image_section.dart';
@@ -19,7 +20,9 @@ class ProductDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        return ProductDetailBloc()..add(ProductFetched(productId));
+        return ProductDetailBloc(
+          repository: ProductDetailRepositoryImpl(),
+        )..add(ProductFetched(productId));
       },
       child: Scaffold(
         appBar: AppBar(

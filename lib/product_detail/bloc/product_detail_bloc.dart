@@ -5,14 +5,16 @@ import 'package:stylish/product_detail/data/product_detail_repository.dart';
 import 'package:stylish/product_detail/model/product.dart';
 
 class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
-  ProductDetailBloc() : super(const ProductDetailState()) {
+  ProductDetailBloc({
+    required this.repository,
+  }) : super(const ProductDetailState()) {
     on<ColorChanged>(_onColorChanged);
     on<SizeChanged>(_onSizeChanged);
     on<QuantityChanged>(_onQuantityChanged);
     on<ProductFetched>(_onProductFetched);
   }
 
-  final _repository = ProductDetailRepository();
+  ProductDetailRepository repository;
 
   void _onColorChanged(
     ColorChanged event,
@@ -45,7 +47,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
     ProductFetched event,
     Emitter<ProductDetailState> emit,
   ) async {
-    final product = await _repository.getProduct(event.productId);
+    final product = await repository.getProduct(event.productId);
     emit(state.copyWith(product: product));
   }
 }

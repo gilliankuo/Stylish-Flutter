@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/gallery/bloc/gallery_bloc.dart';
 import 'package:stylish/gallery/bloc/gallery_state.dart';
+import 'package:stylish/gallery/data/gallery_repository.dart';
 import 'package:stylish/product_detail/product_detail_page.dart';
 
 import '../util/route_util.dart';
@@ -34,7 +35,9 @@ class GalleryPage extends StatelessWidget {
       ),
       body: LayoutBuilder(builder: (context, constraints) {
         return BlocProvider(
-          create: (_) => GalleryBloc()..add(const CategoriesFetched()),
+          create: (_) => GalleryBloc(
+            repository: GalleryRepositoryImpl(),
+          )..add(const CategoriesFetched()),
           child:
               BlocBuilder<GalleryBloc, GalleryState>(builder: (context, state) {
             return Material(
