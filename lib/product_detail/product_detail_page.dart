@@ -5,6 +5,7 @@ import 'package:stylish/product_detail/bloc/product_detail_event.dart';
 import 'package:stylish/product_detail/bloc/product_detail_state.dart';
 import 'package:stylish/util/responsive_layout.dart';
 
+import '../util/app_bar.dart';
 import 'data/product_detail_repository.dart';
 import 'model/product.dart';
 import 'product_description_section.dart';
@@ -25,15 +26,7 @@ class ProductDetailPage extends StatelessWidget {
         )..add(ProductFetched(productId));
       },
       child: Scaffold(
-        appBar: AppBar(
-            title: Image.asset(
-              'assets/stylish_logo.png',
-              height: 20,
-            ),
-            centerTitle: true,
-            elevation: 0,
-            backgroundColor: Theme.of(context).colorScheme.secondary,
-            automaticallyImplyLeading: false),
+        appBar: createStylishAppBar(context),
         body: BlocBuilder<ProductDetailBloc, ProductDetailState>(
             builder: (context, state) {
           return state.product == null

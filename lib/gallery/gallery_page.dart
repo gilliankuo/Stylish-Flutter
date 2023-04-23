@@ -5,6 +5,8 @@ import 'package:stylish/gallery/bloc/gallery_state.dart';
 import 'package:stylish/gallery/data/gallery_repository.dart';
 import 'package:stylish/product_detail/product_detail_page.dart';
 
+import '../cart/view/cart_page.dart';
+import '../util/app_bar.dart';
 import '../util/route_util.dart';
 import 'bloc/gallery_event.dart';
 import 'category_section.dart';
@@ -24,15 +26,9 @@ class GalleryPage extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: Image.asset(
-          'assets/stylish_logo.png',
-          height: 20,
-        ),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Theme.of(context).colorScheme.secondary,
-      ),
+      appBar: createStylishAppBar(context, () {
+        Navigator.of(context).push(createSlideInRightRoute(CartPage()));
+      }),
       body: LayoutBuilder(builder: (context, constraints) {
         return BlocProvider(
           create: (_) => GalleryBloc(
