@@ -1,6 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
-AppBar createStylishAppBar(BuildContext context, [Function? onCartClick]) {
+AppBar createStylishAppBar(
+  BuildContext context, [
+  VoidCallback? onCartClick,
+  VoidCallback? onMapClick,
+]) {
   return AppBar(
     title: Image.asset(
       'assets/stylish_logo.png',
@@ -11,11 +17,17 @@ AppBar createStylishAppBar(BuildContext context, [Function? onCartClick]) {
     backgroundColor: Theme.of(context).colorScheme.secondary,
     automaticallyImplyLeading: false,
     actions: [
-      if (onCartClick != null)
+      if (onCartClick != null && Platform.isAndroid)
         IconButton(
             icon: const Icon(Icons.shopping_cart),
             onPressed: () {
               onCartClick.call();
+            }),
+      if (onMapClick != null)
+        IconButton(
+            icon: const Icon(Icons.map),
+            onPressed: () {
+              onMapClick.call();
             })
     ],
   );

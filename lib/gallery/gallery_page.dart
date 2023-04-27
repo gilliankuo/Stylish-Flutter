@@ -6,11 +6,12 @@ import 'package:stylish/gallery/data/gallery_repository.dart';
 import 'package:stylish/product_detail/product_detail_page.dart';
 
 import '../cart/view/cart_page.dart';
+import '../map/view/map_page.dart';
 import '../util/app_bar.dart';
+import '../util/responsive_layout.dart';
 import '../util/route_util.dart';
 import 'bloc/gallery_event.dart';
 import 'category_section.dart';
-import '../util/responsive_layout.dart';
 import 'widgets.dart';
 
 class GalleryPage extends StatelessWidget {
@@ -28,6 +29,8 @@ class GalleryPage extends StatelessWidget {
     return Scaffold(
       appBar: createStylishAppBar(context, () {
         Navigator.of(context).push(createSlideInRightRoute(CartPage()));
+      }, () {
+        Navigator.of(context).push(createSlideInRightRoute(MapPage()));
       }),
       body: LayoutBuilder(builder: (context, constraints) {
         return BlocProvider(

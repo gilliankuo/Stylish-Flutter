@@ -5,8 +5,13 @@
     <application
             tools:replace="android:label"
             android:label="stylish"
-            android:name="${applicationName}"
+            android:name="android.app.Application"
             android:icon="@mipmap/ic_launcher">
+<!--        https://stackoverflow.com/questions/70957389/what-does-the-applicationname-in-flutter-androidmanifest-xml-means-->
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+                   android:value="${mapApiKey}"/>
+
         <activity
                 android:name=".MainActivity"
                 android:exported="true"
