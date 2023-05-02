@@ -17,13 +17,13 @@ AppBar createStylishAppBar(
     backgroundColor: Theme.of(context).colorScheme.secondary,
     automaticallyImplyLeading: false,
     actions: [
-      if (onCartClick != null && Platform.isAndroid)
+      if (onCartClick != null)
         IconButton(
             icon: const Icon(Icons.shopping_cart),
             onPressed: () {
               onCartClick.call();
             }),
-      if (onMapClick != null)
+      if (onMapClick != null && isAndroid())
         IconButton(
             icon: const Icon(Icons.map),
             onPressed: () {
@@ -31,4 +31,12 @@ AppBar createStylishAppBar(
             })
     ],
   );
+}
+
+bool isAndroid() {
+  try {
+    return (Platform.isAndroid);
+  } catch (e) {
+    return false;
+  }
 }
