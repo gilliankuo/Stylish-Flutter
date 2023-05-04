@@ -6,6 +6,7 @@ AppBar createStylishAppBar(
   BuildContext context, [
   VoidCallback? onCartClick,
   VoidCallback? onMapClick,
+  VoidCallback? onMediaClick,
 ]) {
   return AppBar(
     title: Image.asset(
@@ -28,6 +29,12 @@ AppBar createStylishAppBar(
             icon: const Icon(Icons.map),
             onPressed: () {
               onMapClick.call();
+            }),
+      if (onMediaClick != null)
+        IconButton(
+            icon: const Icon(Icons.video_call),
+            onPressed: () {
+              onMediaClick.call();
             })
     ],
   );

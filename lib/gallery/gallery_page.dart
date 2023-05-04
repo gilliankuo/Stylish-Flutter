@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stylish/gallery/bloc/gallery_bloc.dart';
 import 'package:stylish/gallery/bloc/gallery_state.dart';
 import 'package:stylish/gallery/data/gallery_repository.dart';
+import 'package:stylish/media/media_page.dart';
 import 'package:stylish/product_detail/product_detail_page.dart';
 
 import '../cart/view/cart_page.dart';
-import '../map/view/map_page.dart';
 import '../util/app_bar.dart';
 import '../util/responsive_layout.dart';
 import '../util/route_util.dart';
@@ -27,11 +27,15 @@ class GalleryPage extends StatelessWidget {
     }
 
     return Scaffold(
-      appBar: createStylishAppBar(context, () {
-        Navigator.of(context).push(createSlideInRightRoute(CartPage()));
-      }, () {
-        Navigator.of(context).push(createSlideInRightRoute(MapPage()));
-      }),
+      appBar: createStylishAppBar(
+          context,
+          () {
+            Navigator.of(context).push(createSlideInRightRoute(CartPage()));
+          },
+          null,
+          () {
+            Navigator.of(context).push(createSlideInRightRoute(MediaPage()));
+          }),
       body: LayoutBuilder(builder: (context, constraints) {
         return BlocProvider(
           create: (_) => GalleryBloc(
