@@ -44,6 +44,7 @@ dependencies:
   cached_network_image: ^3.2.3
   collection: ^1.17.0
   google_maps_flutter: ^2.2.5
+  arcore_flutter_plugin: ^0.1.0
 
 dev_dependencies:
   flutter_test:
